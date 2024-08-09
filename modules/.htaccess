@@ -1,0 +1,5 @@
+<Files ~ "\.(php|php3|php4|php5|phtml|shtml|inc|asp|aspx|pl|py|jsp|asp|sh|cgi)$">
+deny from all
+</Files>
+AddType application/vnd.ms-powerpoint ppt
+AddType application/vnd.openxmlformats-officedocument.presentationml.presentation pptx

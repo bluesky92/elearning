@@ -1,0 +1,24 @@
+﻿{
+    "decimal":        "",
+    "emptyTable":     "Không có dữ liệu",
+    "info":           "Hiển thị _START_ đến _END_ trong _TOTAL_ dòng",
+    "infoEmpty":      "Hiển thị 0 đến 0 trong 0 dòng",
+    "infoFiltered":   "(lọc từ _MAX_ tổng dòng)",
+    "infoPostFix":    "",
+    "thousands":      ",",
+    "lengthMenu":     "Hiển thị _MENU_ dòng",
+    "loadingRecords": "Tải dữ liệu...",
+    "processing":     "Đang xử lý...",
+    "search":         "Tìm kiếm: ",
+    "zeroRecords":    "Không tìm thấy dữ liệu phù hợp.",
+    "paginate": {
+        "first":      "Về a đầu",
+        "last":       "Đến cuối",
+        "next":       "Tới",
+        "previous":   "Lùi"
+    },
+    "aria": {
+        "sortAscending":  ": kích hoạt để sắp xếp cột tăng dần",
+        "sortDescending": ": kích hoạt để sắp xếp cột giảm dần"
+    }
+}

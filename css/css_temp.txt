@@ -1,0 +1,4 @@
+answer-option {padding: 5px; margin: 2px 0;border: 1px solid #ddd;}
+.answer-option.correct{background-color: #1bc105;border-color: #d0e9c6;}
+.answer-option.selected{background-color: #958f95;border-color: #fbeed5;}
+.answer-option.correct.selected{background-color: #dff0d8;border-color: #d0e9c6;opacity: 0.8;}
