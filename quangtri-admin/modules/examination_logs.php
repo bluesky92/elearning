@@ -83,19 +83,42 @@ if($db->RowCount==0) loadPageAdmin("Mục không tồn tại.","?".TTH_PATH."=ar
                         $db->order = "";
                         $db->limit = $start . ', ' . $perpage;
                         $rows = $db->select();
-
+                        $tesst = 0;
                         foreach($rows as $row) {
                             $i++;
 
-                            $db->table = "examination_answer";
-                            $db->condition = "`examination_id` = $examination_id AND `user_id` = " . intval($row['user_id']) . " AND `test` = 1";
-                            $db->order = "";
-                            $db->limit = "";
-                            $db->select();
-                            $total_match = $db->RowCount;
+                            // $db->table = "examination_answer";
+                            // $db->condition = "`examination_id` = $examination_id AND `user_id` = " . intval($row['user_id']) . " AND `test` = 1";
+                            // $db->order = "";
+                            // $db->limit = "";
+                            // $db->select();
+                            // $total_match = $db->RowCount;
+                            $examination_logs_id = 0;
+                            if (intval($row["status"])==1) {
+                                $db->table = "examination_logs";
+                                // $condition1 = "`examination_id` = $examination_id AND `user_id` = " . intval($row['user_id']) . " AND `end` = " . intval($row['end']);
+                                $db->condition = "`examination_id` = $examination_id AND `user_id` = " . intval($row['user_id']) . " AND `end` = " . intval($row['end']);
+                                // echo($condition1);
+                                $db->order = "";
+                                $db->limit = "";
+                                $ketquas = $db->select();
+                                $result_score = 0;
+                                foreach($ketquas as $ketqua) {
+                                    // $tesst = 1;
+                                    // echo($ketqua['score']);
+                                    // echo('<br/>');
+                                    // echo("Test: $tesst");
+                                    // echo('<br/>');
+                                    $examination_logs_id = $ketqua['examination_logs_id'];
+                                    $result_score = $ketqua['score'];
+                                }
+                               
+                            }
+                             
                             ?>
                             <tr>
-                                <td align="center"><?php echo $i?></td>
+                                <!-- số thứ tự -->
+                                <td align="center"><?php echo $i?></td> 
                                 <td><?php echo getUserName(intval($row['user_id']));?></td>
                                 <td><?php echo getUserFullName(intval($row['user_id']));?></td>
                                 <td align="center">
@@ -107,11 +130,12 @@ if($db->RowCount==0) loadPageAdmin("Mục không tồn tại.","?".TTH_PATH."=ar
                                 </td>
                                 <td align="center"><?php echo $date->vnDateTime($row['start']);?></td>
                                 <td align="center"><?php echo $date->vnDateTime($row['end']);?></td>
-                                <td align="center"><?php echo $total_match . '/' . $examination_count;?></td>
+
+                                <td align="center"><?php echo $result_score;?></td>
                                 <td class="details-control" align="center">
                                     <div class="checkbox">
                                         <?php
-                                        if(intval($row["status"])==1) echo '<a data-toggle="modal" data-target="#_examination" href="javascript:;" onclick="return open_modal_examination(' . $examination_id . ', ' . intval($row['user_id']) . ');"><img data-toggle="tooltip" data-placement="top" title="Xem kết quả kiểm tra" src="images/list.png"></a>';
+                                        if(intval($row["status"])==1) echo '<a data-toggle="modal" data-target="#_examination" href="javascript:;" onclick="return open_modal_examination(' . $examination_id . ', ' . intval($row['user_id']) . ','.intval($examination_logs_id).');"><img data-toggle="tooltip" data-placement="top" title="Xem kết quả kiểm tra" src="images/list.png"></a>';
                                         ?>
                                     </div>
                                 </td>

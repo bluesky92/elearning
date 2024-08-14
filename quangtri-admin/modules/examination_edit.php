@@ -41,6 +41,7 @@ $OK = false;
 $error = '';
 if($typeFunc=='edit'){
     $count  = isset($_POST['count']) ? $_POST['count'] : 0;
+    $count_exams  = isset($_POST['count_exams']) ? $_POST['count_exams'] : 0;
     $time   = isset($_POST['time']) ? $_POST['time'] : 0;
     $start  = isset($_POST['start']) ? $_POST['start'] : time();
     if(empty($title)) $error = '<span class="show-error">Vui lòng nhập tiêu đề bài kiểm tra.</span>';
@@ -48,8 +49,10 @@ if($typeFunc=='edit'){
 		$OK = true;
 		if($OK) {
             // ---- TO - Danh sách người nhận.
-            $to = isset($_POST['to']) ? $_POST['to'] : array();
-            $to_role = $to_product = $to_personal = $to_all = array();
+            // $to = isset($_POST['to']) ? $_POST['to'] : array();
+            // $to_role = 0;
+            // $to_product = $to_personal = $to_all = array();
+            /*
             if(isset($to) && count($to) > 0) {
                 for ($i = 0; $i < count($to); $i++) {
                     $item = explode(';', $to[$i]);
@@ -83,7 +86,11 @@ if($typeFunc=='edit'){
                     }
                 }
             }
+                */
             //---
+            // loadPageSucces("Đã chỉnh sửa dữ liệu thành công. $to_role", "?".TTH_PATH."=examination_list");
+            //var_dump($to_role);
+            /*
             $to_role = array_keys(array_flip($to_role));
             $to_role = json_encode($to_role);
             //---
@@ -95,6 +102,7 @@ if($typeFunc=='edit'){
             //---
             $to_all = array_keys(array_flip($to_all));
             $to_all2 = json_encode($to_all);
+            */
             //---
             if(!isset($_POST['is_active'])) {
                 $is_active = 0;
@@ -115,6 +123,7 @@ if($typeFunc=='edit'){
                 'product_menu_id' => intval($product_menu_id),
                 'product_id' => intval($product_id),
                 'count' => intval($count),
+                'solanthi'=> intval($count_exams),
                 'time' => intval($time),
                 'start' => strtotime($date->dmYtoYmd($start)),
                 'to_role' => $db->clearText($to_role),
@@ -127,6 +136,7 @@ if($typeFunc=='edit'){
 			);
 			$db->condition = "`examination_id` = $examination_id";
 			$db->update($data);
+            
 			if($db->AffectedRows>0) {
                 $db->table = "examination_logs";
                 $db->condition = "`examination_id` = $examination_id";
@@ -135,7 +145,8 @@ if($typeFunc=='edit'){
                 $db->table = "examination_answer";
                 $db->condition = "`examination_id` = $examination_id";
                 $db->delete();
-
+                // đoạn này chèn dữ liệu đủ , tạo khung trước cho toàn bộ thí sinh....
+                /*
                 foreach ($to_all as $value) {
                     $db->table = "examination_logs";
                     $data = array(
@@ -143,7 +154,7 @@ if($typeFunc=='edit'){
                         'user_id' => $value
                     );
                     $db->insert($data);
-                }
+                } */
             }
             // Ghi thông báo.
             insertNotify(14, 'examination', $examination_id, $_SESSION["user_id"]);
@@ -159,17 +170,19 @@ else {
 	$db->order = "";
 	$db->limit = 1;
 	$rows = $db->select();
+    // var_dump($rows);
 	foreach($rows as $row) {
         $title              = $row['title'];
         $product_menu_id    = intval($row['product_menu_id']);
         $product_id         = intval($row['product_id']);
         $count              = intval($row['count']);
+        $count_exams        = intval($row['solanthi']);
         $time               = intval($row['time']);
         $start              = $date->vnDateTime($row['start']);
-        $to_role            = json_decode($row['to_role']);
-        $to_product         = json_decode($row['to_product']);
-        $to_personal        = json_decode($row['to_personal']);
+        $to_role            = $row['to_role'];
+        $to_product         = $row['to_product'];
+        $to_personal        = $row['to_personal'];
 		$is_active		    = intval($row['is_active']);
 	}
 }
-if(!$OK) examination("?".TTH_PATH."=examination_edit", "edit", $examination_id, $product_menu_id, $product_id, $title, $count, $time, $start, $to_role, $to_product, $to_personal, $is_active, $error);
+if(!$OK) examination("?".TTH_PATH."=examination_edit", "edit", $examination_id, $product_menu_id, $product_id, $title, $count, $count_exams, $time, $start, $to_role, $to_product, $to_personal, $is_active, $error);

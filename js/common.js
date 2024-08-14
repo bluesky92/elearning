@@ -697,7 +697,13 @@ function open_modal(id, type) {
         success: function(data){
             showResult('el-modal', data);
 			console.log(data);
-        }
+        },
+		error: function(jqXHR, textStatus, errorThrown) {
+			// Xử lý lỗi ở đây
+			console.error("Request failed: " + textStatus + ", " + errorThrown);
+			// Tùy chọn: Hiển thị thông báo lỗi cho người dùng
+			alert("An error occurred while processing your request. Please try again later.");
+		}
     });
 }
 
@@ -903,3 +909,31 @@ function viewAnswers(examId, user) {
     });
     return false;
 }
+document.addEventListener('DOMContentLoaded', function() {
+    var accordions = document.querySelectorAll('.accordion-button');
+
+    accordions.forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Toggle active class
+            this.classList.toggle('active');
+            
+            // Get the associated content
+            var content = this.nextElementSibling;
+            
+            // Toggle visibility
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+            } else {
+                content.style.display = 'block';
+            }
+            
+            // Close other accordion items
+            accordions.forEach(function(otherButton) {
+                if (otherButton !== button) {
+                    otherButton.classList.remove('active');
+                    otherButton.nextElementSibling.style.display = 'none';
+                }
+            });
+        });
+    });
+});

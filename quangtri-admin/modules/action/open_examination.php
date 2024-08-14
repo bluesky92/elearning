@@ -4,9 +4,11 @@ if (!defined('TTH_SYSTEM')) { die('Please stop!'); }
 if(isset($_POST['id'])) {
 	$id     = isset($_POST['id']) ? intval($_POST['id']) : 0;
     $user   = isset($_POST['user']) ? intval($_POST['user']) : 0;
+    $examination_logs_id   = isset($_POST['exam_logs_id']) ? intval($_POST['exam_logs_id']) : 0;
 	$date   = new DateClass();
 
     $result = $examination_title = $examination_time = $examination_count = $examination_start = $examination_end  = '';
+    // $examination_logs_id = 0;
     $db->table = "examination";
     $db->condition = "`examination_id` = $id";
     $db->order = "";
@@ -26,10 +28,13 @@ if(isset($_POST['id'])) {
     foreach($rows as $row){
         $examination_start  = intval($row['start']);
         $examination_end    = intval($row['end']);
+        // $examination_logs_id = intval($row['examination_logs_id']);
     }
-
+    // var_dump($examination_logs_id);
+    // $db->condition = "`examination_id` = $id AND `examination_logs_id` = $examination_logs_id AND `user_id` = $user";
 	$db->table = "examination_answer";
-    $db->condition = "`examination_id` = $id AND `user_id` = $user";
+    // $db->condition = "`examination_id` = $id AND `user_id` = $user";
+    $db->condition = "`examination_id` = $id AND `examination_logs_id` = $examination_logs_id AND `user_id` = $user";
 	$db->order = "";
 	$db->limit = "";
 	$rows = $db->select();
@@ -42,6 +47,7 @@ if(isset($_POST['id'])) {
         $result .= '+ <span>Thời gian làm bài (quy định):</span> <strong>' . $examination_time . ' (phút)</strong><br>';
         $result .= '+ <span>Làm kiểm tra lúc:</span> <strong class="start">' .  $date->vnDateTime($examination_start) . '</strong><br>';
         $result .= '+ <span>Nộp kiểm tra lúc:</span> <strong class="end">' .  $date->vnDateTime($examination_end) . '</strong></p>';
+        $result .= '+ <span>Dev:</span> <strong class="end">' .  $examination_logs_id . '</strong></p>';
 
         // .question-view
         $result .= '<div class="question-view">';
@@ -110,8 +116,21 @@ if(isset($_POST['id'])) {
         $result .= '</div>';
         $result .= '<div class="modal-footer"><button type="button" class="btn btn-form-primary btn-form" data-dismiss="modal">Đóng</button></div>';
         $result .= '</div></div>';
-		foreach($rows as $row) {
-		}
-	}
+		// foreach($rows as $row) {
+		// }
+	} 
+    if($db->RowCount == 0) {
+        $result .= '<div class="modal-dialog"><div class="modal-content">';
+        $result .= '<div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="examinationModalLabel">' . $examination_title .'</h4></div>';
+        $result .= '<div class="modal-body">';
+        $result .= '<p class="exa-info">+ <span>Họ và tên:</span> <strong>' .  getUserFullName($user) . '</strong><br>';
+        $result .= '+ <span>Số câu hỏi (quy định):</span> <strong>' .  $examination_count . '</strong><br>';
+        $result .= '+ <span>Thời gian làm bài (quy định):</span> <strong>' . $examination_time . ' (phút)</strong><br>';
+        $result .= '+ <span>Làm kiểm tra lúc:</span> <strong class="start">' .  $date->vnDateTime($examination_start) . '</strong><br>';
+        $result .= '+ <span>Nộp kiểm tra lúc:</span> <strong class="end">' .  $date->vnDateTime($examination_end) . '</strong></p>';
+        $result .= '+ <span>Dev:</span> <strong class="end">' .  $examination_logs_id . '</strong></p>';
+        $result .= ' <div style ="color: red;"> Bài kiểm tra, đã bị lỗi. Không xem được.</div>';
+    }
+    
 	echo $result;
 }

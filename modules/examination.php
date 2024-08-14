@@ -21,9 +21,9 @@ $breadcrumb_category = '<li><a href="' . HOME_URL_LANG . '/examination" title="K
                 $db->condition = "`is_active` = 1 AND `to_role` IN (SELECT `role_id` FROM `" . TTH_DATA_PREFIX . "core_user` WHERE `user_id` = " . $account["id"] . ")";
                 $db->order = "`start` DESC";
                 $db->limit = "";
-                $db->select();
+                $xemnao = $db->select();
                 $total = $db->RowCount;
-				//var_dump($account);
+				// var_dump($xemnao);
 				echo("total: ".$total);
                 if($total>0) {
                     $total_pages = 0;
@@ -34,7 +34,8 @@ $breadcrumb_category = '<li><a href="' . HOME_URL_LANG . '/examination" title="K
                     $start=($page-1)*$per_page;
 
                     $db->table = "examination";
-                    $db->condition = "`is_active` = 1 AND `examination_id` IN (SELECT `examination_id` FROM `" . TTH_DATA_PREFIX . "examination_logs` WHERE `user_id` = " . $account["id"] . ")";
+                    // $db->condition = "`is_active` = 1 AND `examination_id` IN (SELECT `examination_id` FROM `" . TTH_DATA_PREFIX . "examination_logs` WHERE `user_id` = " . $account["id"] . ")";
+                    $db->condition = "`is_active` = 1 AND `to_role` IN (SELECT `role_id` FROM `" . TTH_DATA_PREFIX . "core_user` WHERE `user_id` = " . $account["id"] . ")";
                     $db->order = "`start` DESC";
                     $db->limit = $start . ", " . $per_page;
                     $rows = $db->select();

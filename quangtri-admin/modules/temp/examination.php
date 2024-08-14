@@ -1,7 +1,7 @@
 <?php
 if (!defined('TTH_SYSTEM')) { die('Please stop!'); }
 //
-function examination($act, $typeFunc, $examination_id, $product_menu_id, $product_id, $title, $count, $time, $start, array $to_role, array $to_product, array $to_personal, $is_active, $error) {
+function examination($act, $typeFunc, $examination_id, $product_menu_id, $product_id, $title, $count, $count_exams, $time, $start, $to_role, $to_product, $to_personal, $is_active, $error) {
     global $corePrivilegeSlug;
     dashboardCoreAdmin();
 ?>
@@ -37,6 +37,10 @@ function examination($act, $typeFunc, $examination_id, $product_menu_id, $produc
 								<td><input class="form-control auto-number" type="text" name="count" maxlength="3" style="width: 125px;" value="<?php echo stripslashes($count)?>" data-a-sep="." data-a-dec="," data-v-max="999" data-v-min="0" autocomplete="off"></td>
 							</tr>
                             <tr>
+								<td><label>Số lần được kiểm tra:</label></td>
+								<td><input class="form-control auto-number" type="text" name="count_exams" maxlength="3" style="width: 125px;" value="<?php echo stripslashes($count_exams)?>" data-a-sep="." data-a-dec="," data-v-max="999" data-v-min="0" autocomplete="off"></td>
+							</tr>
+                            <tr>
                                 <td><label>Thời gian làm bài:</label> (phút)</td>
                                 <td><input class="form-control auto-number" type="text" name="time" maxlength="3" style="width: 125px;" value="<?php echo stripslashes($time)?>" data-a-sep="." data-a-dec="," data-v-max="999" data-v-min="0" autocomplete="off"></td>
                             </tr>
@@ -45,8 +49,14 @@ function examination($act, $typeFunc, $examination_id, $product_menu_id, $produc
                                 <td><input class="form-control" id="input-datetime" type="text" name="start" maxlength="15" style="width: 125px;" value="<?php echo stripslashes($start)?>" autocomplete="off"></td>
                             </tr>
                             <tr>
-                                <td><label>Thành phần:</label></td>
-                                <td><?php echo listTo($to_role, $to_product, $to_personal);?></td>
+                                <td><label>Thành phần thi:</label></td>
+                                <td>
+                                    <select class="form-control" name="to_role" id="to_role" style="width: 120px;">
+                                        <option value="13" <?php echo $to_role==13?"selected":""?>>Học viên</option>
+                                        <option value="1" <?php echo $to_role==1?"selected":""?>>Quản trị viên</option>
+                                        <option value="2" <?php echo $to_role==2?"selected":""?>>Kiểm thử</option>
+                                    </select>
+                                </td>
                             </tr>
                             <?php
                             if(in_array("examination_active", $corePrivilegeSlug)) {

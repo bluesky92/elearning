@@ -20,8 +20,8 @@ $slug = getSlugCategory(89);
             </div>
             <div class="container-fluid">
                 <div class="flex-container">
-                    <div class="pull-left"><a style="color:white;" href="<?php echo HOME_URL_LANG . '/' . getSlugCategory(99);?>"
-                            class="link-forum"><i></i> <?php echo getNameCategory(89);?></a></div>
+                    <div class="pull-left"><a style="color:white;" href="<?php echo HOME_URL_LANG . '/' . getSlugCategory(98);?>"
+                            class="link-forum"><i></i> <?php echo getNameCategory(98);?></a></div>
                     <div class="pull-left"><a style="color:white;" href="<?php echo HOME_URL_LANG . '/' . getSlugCategory(100);?>"
                             class="link-forum"><i></i> <?php echo getNameCategory(90);?></a></div>
                     <div class="pull-left"><a style="color:white;" href="<?php echo HOME_URL_LANG . '/' . getSlugCategory(101);?>"
@@ -108,8 +108,11 @@ $slug = getSlugCategory(89);
                     <?php } else { ?>
                     <div class="hd-user">
                         <a class="btn-register" data-target="#register-modal" data-toggle="modal"
+                            style ="color: white; font-weight: 600; font-size: 16px"
                             href="javascript:;">Đăng ký</a>
-                        <a class="btn-login" data-target="#login-modal" data-toggle="modal" href="javascript:;">Đăng
+                        <a class="btn-login" data-target="#login-modal" data-toggle="modal" 
+                            style ="background: white; font-size: 16px;"    
+                            href="javascript:;">Đăng
                             nhập</a>
                         <!-- Register -->
                         <div class="modal fade" id="register-modal" tabindex="-1" role="dialog"

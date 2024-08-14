@@ -30,6 +30,7 @@ $OK         = false;
 $error      = '';
 if($typeFunc=='add'){
     $count  = isset($_POST['count']) ? $_POST['count'] : 0;
+    $count_exams  = isset($_POST['count_exams']) ? $_POST['count_exams'] : 1;
     $time   = isset($_POST['time']) ? $_POST['time'] : 0;
     $start  = isset($_POST['start']) ? $_POST['start'] : time();
 	if(empty($title)) $error = '<span class="show-error">Vui lòng nhập tiêu đề bài kiểm tra.</span>';
@@ -37,6 +38,7 @@ if($typeFunc=='add'){
 		$OK = true;
 		if($OK) {
             // ---- TO - Danh sách người nhận.
+            /*
             $to = isset($_POST['to']) ? $_POST['to'] : array();
             $to_role = $to_product = $to_personal = $to_all = array();
             if(isset($to) && count($to) > 0) {
@@ -84,6 +86,7 @@ if($typeFunc=='add'){
             //---
             $to_all = array_keys(array_flip($to_all));
             $to_all2 = json_encode($to_all);
+            */
             //---
             $is_active = isset($_POST['is_active']) ? intval($_POST['is_active']) : 0;
             //---
@@ -94,6 +97,7 @@ if($typeFunc=='add'){
 				'product_menu_id' => intval($product_menu_id),
                 'product_id' => intval($product_id),
 				'count' => intval($count),
+                'solanthi' => intval($count_exams),
                 'time' => intval($time),
                 'start' => strtotime($date->dmYtoYmd($start)),
                 'to_role' => $db->clearText($to_role),
@@ -111,17 +115,17 @@ if($typeFunc=='add'){
                 // Ghi thông báo.
                 insertNotify(15, 'active/examination', $id_query, $_SESSION["user_id"]);
             }
-
-            if($id_query>0) {
-                foreach ($to_all as $value) {
-                    $db->table = "examination_logs";
-                    $data = array(
-                        'examination_id' => $id_query,
-                        'user_id' => $value
-                    );
-                    $db->insert($data);
-                }
-            }
+// bỏ đoạn tạo log này đi 
+            // if($id_query>0) {
+            //     foreach ($to_all as $value) {
+            //         $db->table = "examination_logs";
+            //         $data = array(
+            //             'examination_id' => $id_query,
+            //             'user_id' => $value
+            //         );
+            //         $db->insert($data);
+            //     }
+            // }
             // Ghi thông báo.
             insertNotify(13, 'examination', $id_query, $_SESSION["user_id"]);
 
@@ -133,13 +137,14 @@ else {
     $product_menu_id    = 0;
     $product_id         = 0;
     $title              = '';
-    $count              = 0;
-    $time               = 0;
+    $count              = 10;
+    $count_exams        = 1;
+    $time               = 30;
     $start              = $date->vnDateTime(time());
-    $to_role            = array();
-    $to_product         = array();
-    $to_personal        = array();
+    $to_role            = 13;
+    $to_product         = 0;
+    $to_personal        = 0;
     if(in_array("examination_active", $corePrivilegeSlug)) $is_active = 1;
     else $is_active = 0;
 }
-if(!$OK) examination("?".TTH_PATH."=examination_add", "add", 0, $product_menu_id, $product_id, $title, $count, $time, $start, $to_role, $to_product, $to_personal, $is_active, $error);
+if(!$OK) examination("?".TTH_PATH."=examination_add", "add", 0, $product_menu_id, $product_id, $title, $count, $count_exams, $time, $start, $to_role, $to_product, $to_personal, $is_active, $error);

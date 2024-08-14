@@ -407,15 +407,15 @@ function open_modal_order(id) {
 	return false;
 }
 
-function open_modal_examination(id, user) {
+function open_modal_examination(id, user,exam_logs_id) {
     showLoader();
     $.ajax({
         url:'/quangtri-admin/action.php',
         type: 'POST',
-        data: 'url=open_examination&id='+id+'&user='+user,
+        data: 'url=open_examination&id='+id+'&user='+user+'&exam_logs_id='+exam_logs_id,
         dataType: 'html',
         success: function(data){
-			console.log(user);
+			console.log(exam_logs_id);
             showResult('_examination', data);
         }
     });

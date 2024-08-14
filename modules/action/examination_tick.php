@@ -2,31 +2,35 @@
 if (!defined('TTH_SYSTEM')) { die('Please stop!'); }
 //
 if($account["id"]>0) {
+    echo("NOW");
 	$id             = isset($_POST['id']) ? intval($_POST['id']) : 0;
     $date           = new DateClass();
 	$result         = '';
 	$status         = $start = 0;
     $current_time   = strtotime($date->vnOther(time(), 'Y-m-d H:i'));
 
-	$db->table = "examination_logs";
-	$db->condition = "`examination_id` = $id AND `user_id` = " . intval($account["id"]);
-	$db->order = "";
-	$db->limit = 1;
-	$rows = $db->select();
-    foreach ($rows as $row) {
-        $status = intval($row['status']);
-        $start  = intval($row['start']);
-    }
+	// $db->table = "examination_logs";
+	// $db->condition = "`examination_id` = $id AND `user_id` = " . intval($account["id"]);
+	// $db->order = "";
+	// $db->limit = 1;
+	// $rows = $db->select();
+    // foreach ($rows as $row) {
+    //     $status = intval($row['status']);
+    //     $start  = intval($row['start']);
+    // }
 
-    if($start==0) {
+    // if($start==0) {
         $start = $current_time;
         $db->table = "examination_logs";
         $data = array(
+            'examination_id'=>$id,
+            'user_id' => intval($account["id"]),
+            'exam_order' =>1,
             'start' => $start
         );
-        $db->condition = "`examination_id` = $id AND `user_id` = " . intval($account["id"]);
-        $db->update($data);
-    }
+        $db->condition = "";
+        $db->insert($data); ///update hay insert 
+    // }
 
     $db->table = "examination";
     $db->condition = "`examination_id` = $id";
@@ -34,7 +38,7 @@ if($account["id"]>0) {
     $db->limit = 1;
     $rows = $db->select();
 	if($db->RowCount>0) {
-	    if($status==0) {
+	    //if($status==0) {
             $result .= '<div class="modal-dialog" style="width: auto !important;"><div class="modal-content">';
             foreach ($rows as $row) {
                 $result .= '<div class="modal-header"><h3 class="modal-title">KỲ KIỂM TRA</h3><p class="no-margin text-center">' . stripslashes($row['title']) . '</p></div>';
@@ -98,7 +102,7 @@ if($account["id"]>0) {
                 $minutes = '<div id="exa-timer">' . $minutes . ':00</div><script>startTimer();$(function(){$(".square-green input").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",increaseArea:"20%"})});</script>';
             }
             $result .= '<div class="modal-footer"></div></div></div>';
-        }
+        //}
     }
 
     echo $result . $minutes;
