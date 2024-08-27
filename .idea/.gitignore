@@ -8,3 +8,5 @@
 /dataSources.local.xml
 # upload mp4
 *.mp4
+# error_log
+tmp/
