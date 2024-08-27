@@ -28,7 +28,8 @@ if($account["id"]>0) {
 	$arr_like = array_filter($arr_like);
 }
 ?>
-<main class="home" style="margin-top: 130px;">
+<!-- <main class="home" style="margin-top: 130px;"> -->
+<main class="home">
 	<div class="container">
 		<div class="row">
 			<?php
