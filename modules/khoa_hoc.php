@@ -392,7 +392,7 @@ if($id_article > 0) {
 						$db->limit = 6;
 						$rows = $db->select();
 						if ($db->RowCount > 0) {
-							echo '<h3>Các khóa học nổi bật</h3>';
+							echo '<h3>Chuyên đề nổi bật</h3>';
 							echo '<div class="clearfix"><div class="card-category" id="courses_slider" style="position:relative;overflow:hidden;height:277px;">';
 							echo '<div class="pre-card" style="position:absolute;top:45px;left:0px;background-color:#ffffff;"><a data-slide="prev" href="#" style="display:block;"><i class="fa fa-chevron-left"></i></a></div>';
 							echo '<div class="next-card" style="position:absolute;top:45px;right:0px;background-color:#ffffff;"><a data-slide="next" href="#" style="display:block;"><i class="fa fa-chevron-right"></i></a></div>';
@@ -438,7 +438,7 @@ if($id_article > 0) {
 						$rows = $db->select();
 
 						$i = 0;
-						echo '<div class="course-list"><h3>Tất cả các khóa học</h3>';
+						echo '<div class="course-list"><h3>Tất cả các Chuyên đề</h3>';
 						foreach ($rows as $row) {
 							include(_F_TEMPLATES . DS . "show_list_product.php");
 							$i++;
@@ -467,7 +467,7 @@ if($id_article > 0) {
 						$db->limit = 6;
 						$rows = $db->select();
 						if ($db->RowCount > 0) {
-							echo '<h3>Các khóa học nổi bật</h3>';
+							echo '<h3>Chuyên đề nổi bật</h3>';
 							echo '<div class="clearfix"><div class="card-category" id="courses_slider" style="position:relative;overflow:hidden;height:277px;">';
 							echo '<div class="pre-card" style="position:absolute;top:45px;left:0px;background-color:#ffffff;"><a data-slide="prev" href="#" style="display:block;"><i class="fa fa-chevron-left"></i></a></div>';
 							echo '<div class="next-card" style="position:absolute;top:45px;right:0px;background-color:#ffffff;"><a data-slide="next" href="#" style="display:block;"><i class="fa fa-chevron-right"></i></a></div>';
@@ -509,12 +509,12 @@ if($id_article > 0) {
 
 						$db->table = "product";
 						$db->condition = "`is_active` = 1 AND `product_menu_id` IN ($loc)";
-						$db->order = "created_time DESC";
+						$db->order = "created_time ASC";
 						$db->limit = $start . ',' . $per_page;
 						$rows = $db->select();
 
 						$i = 0;
-						echo '<div class="course-list"><h3>Tất cả các khóa học</h3>';
+						echo '<div class="course-list"><h3>Tất cả các Chuyên đề</h3>';
 						foreach ($rows as $row) {
 							include(_F_TEMPLATES . DS . "show_list_product.php");
 							$i++;

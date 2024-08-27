@@ -33,7 +33,7 @@ function product($act, $typeFunc, $product_id, $product_menu_id, $name, $folder,
 						<table class="table table-hover">
 							<tr>
 								<td width="12%"><label>Tiêu đề:</label></td>
-								<td width="88%" colspan="3"><input class="form-control" type="text" name="name" maxlength="255" value="<?php echo stripslashes($name)?>" required="required" ></td>
+								<td width="88%" colspan="3"><input class="form-control" type="text" name="name" maxlength="7000" value="<?php echo stripslashes($name)?>" required="required" ></td>
 							</tr>
 							<tr>
 								<td><label>Mục.:</label></td>

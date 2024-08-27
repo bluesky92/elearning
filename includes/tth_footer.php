@@ -23,7 +23,8 @@ if (!defined('TTH_SYSTEM')) { die('Please stop!'); }
 			</div>
 			<div class="foo-content clearfix">
 				<div class="col col-md-5 col-sm-6 info"><?php echo getPage('copyright');?></div>
-				<div class="col col-md-3 about-us">
+				<div class="col col-md-3 about-us"> </div>
+				<!--div class="col col-md-3 about-us">
 					<h4><?php echo getNameCategory(94);?></h4>
 					<?php
 					$slug = getSlugCategory(94);
@@ -40,7 +41,7 @@ if (!defined('TTH_SYSTEM')) { die('Please stop!'); }
 						echo '</ul>';
 					}
 					?>
-				</div>
+				</div-->
 				<div class="col col-md-4 col-sm-6 contact"><?php echo getPage('contact');?></div>
 			</div>
 		</div>

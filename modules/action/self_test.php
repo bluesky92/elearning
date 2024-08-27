@@ -11,10 +11,10 @@ if($account["id"]>0) {
     $result .= '<form id="self-test" name="library" method="post" onsubmit="return self_test();">';
 
     $result .= '<div class="examination-info">';
-    $result .= '<div class="exa-item"><label>Chủ đề khóa học@:</label><label class="inp">' . categoryName(0) . '</label></div>';
-    $result .= '<div class="exa-item"><label>Khóa học:</label><label id="_product" class="inp">' . productList(0, 0) . '</label></div>';
+    $result .= '<div class="exa-item"><label>Chủ đề khóa học:</label><label class="inp">' . categoryName(0) . '</label></div>';
+    $result .= '<div class="exa-item"><label>Chuyên đề:</label><label id="_product" class="inp">' . productList(0, 0) . '</label></div>';
     $result .= '</div>';
-    $result .= '<div class="exa-btn text-center"><button type="submit" class="btn btn-danger btn-round">Bắt đầu kiểm tra_</button></div>';
+    $result .= '<div class="exa-btn text-center"><button type="submit" class="btn btn-danger btn-round">Bắt đầu kiểm tra</button></div>';
 
     $result .= '</form>';
     $result .= '</div>';
@@ -30,7 +30,7 @@ if($account["id"]>0) {
 function categoryName($id) {
     global $db;
     $result = '';
-    $result .= '<select name="product_menu_id" onchange="return product_list(this.value);" class="form-control">';
+    $result .= '<select name="product_menu_id" onclick="return product_list(this.value);" class="form-control" id="product_menu_dropdown">';
     $db->table = "category";
     $db->condition = "`is_active` = 1 AND `type_id` = 6";
     $db->order = "sort ASC";
@@ -41,6 +41,16 @@ function categoryName($id) {
         $result .= loadMenuCategory($db, 0, 0, $row["category_id"], $id);
     }
     $result .= '</select>';
+    $result .= '<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var dropdown = document.getElementById("product_menu_dropdown");
+        // echo (111);
+        if (dropdown.options.length >= 1) { // 1 item + 1 disabled placeholder
+            dropdown.selectedIndex = 1; // Select the first (and only) valid option
+            dropdown.dispatchEvent(new Event("change")); // Trigger the onchange event
+        }
+    });
+    </script>';
     return $result;
 
 }

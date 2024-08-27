@@ -8,7 +8,7 @@ if($row['img']!="" && $row['img']!="no") {
 	$photo_avt = HOME_URL .'/images/404-course.jpg';
 }
 
-$photo_avt = '<div class="image-course pull-left" style="background-image: url(' . $photo_avt . ')"></div>';
+$photo_avt = '<div class="image-course pull-left-prod" style="background-image: url(' . $photo_avt . ')"></div>';
 
 echo '<div class="search-card">';
 if(in_array($row['product_id'], $arr_like)) echo '<div class="course-wishlist"><a href="javascript:;" onclick="return courses_like('. $row['product_id'] . ', $(this));" rel="1" class="wishlist-heart wishlisted" data-toggle="tooltip" data-placement="top" title="Quan tâm"><div class="wishlist-heart-icon"><i class="fa fa-heart"></i></div></a></div>';

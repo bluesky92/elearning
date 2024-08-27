@@ -15,10 +15,22 @@ if (!defined('TTH_SYSTEM')) { die('Please stop!'); }
 		<li>
 			<i class="fa fa-male"></i> Quản lý thành viên
 		</li>
-		<a class="btn-add-new" href="?<?php echo TTH_PATH?>=core_user_add">Thêm thành viên</a>
+		<!-- <a class="btn-add-new" href="?<?php echo TTH_PATH?>=core_user_add">Thêm thành viên từ file excel ...</a> -->
 	</ol>
 </div>
 <!-- /.row -->
+
+<!-- Add Member Buttons -->
+<div class="row">
+	<div class="col-lg-12">
+		<div class="btn-group" role="group" aria-label="Add Member Buttons">
+			<a class="btn btn-primary" style="border: solid;" href="?<?php echo TTH_PATH?>=core_user_add">Thêm thành viên (Thủ công)</a>
+			<a class="btn btn-primary" style="border: solid;" href="?<?php echo TTH_PATH?>=core_user_add_automatic">Thêm thành viên từ file Excel(Tự động)</a>
+		</div>
+	</div>
+</div>
+<!-- /.Add Member Buttons -->
+
 <?php echo dashboardCoreAdmin(); ?>
 <?php
 if(isset($_POST['idDel'])){
@@ -42,6 +54,7 @@ if(isset($_POST['idDel'])){
 	loadPageSucces("Đã xóa thành viên thành công.","?".TTH_PATH."=core_user");
 }
 ?>
+
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default panel-no-border">

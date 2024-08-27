@@ -58,7 +58,8 @@ if($typeFunc=='add'){
     $file_full_name = "tmp_" . time() . $file_type;
 
     if (($file_size > 0) && ($file_size <= $file_max_size)) {
-        if ($file_type == ".xlsx" || $file_type == ".xls" || $file_type == ".docx" ) {
+        // if ($file_type == ".xlsx" || $file_type == ".xls" || $file_type == ".docx" ) {
+		if ($file_type == ".xlsx" || $file_type == ".xls" ) {
 
             if (@move_uploaded_file($_FILES['file']['tmp_name'], $dir_dest . $file_full_name)) {
                 $u_file = 'Excel_' . time() . '_' . md5(uniqid()) . $file_type;
@@ -71,7 +72,7 @@ if($typeFunc=='add'){
     }
 
     // Insert Database.
-    if(!$OK) $error = '<span class="show-error">Vui lòng chèn file câu hỏi. Hiện tại chỉ hỗ trợ file định dạng .docx, .xls, .xlsx</span>';
+    if(!$OK) $error = '<span class="show-error" style="font-size: 2rem">Vui lòng chèn file câu hỏi. Hiện tại chỉ hỗ trợ file định dạng .xls, .xlsx</span>';
     else {
 		if ($file_type == ".xlsx" || $file_type == ".xls") {
 			include(_F_CLASSES . DS . "PHPExcel" . DS . "IOFactory.php");
@@ -137,10 +138,11 @@ if($typeFunc=='add'){
 		}
         if ($file_type == ".docx") {
 			$path = ROOT_DIR.DS."vendor".DS."autoload.php";
+			require $path;
 			$pathIO = ROOT_DIR.DS."vendor".DS."phpoffice".DS."phpword".DS."src".DS."PhpWord".DS."IOFactory.php";
 			// Đường dẫn tới file Word
 			//$wordFilePath = 'C:\xampp\htdocs\elearning\a.docx';
-			require $path;
+			
 			include($pathIO);
 			$servername = "localhost";
 			$username = "root";

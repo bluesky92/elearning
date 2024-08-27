@@ -74,6 +74,14 @@ function library($act, $typeFunc, $library_id, $product_menu_id, $product_id, $i
         });
         return false;
     }
+    // $(document).ready(function() {
+    //     var $dropdown = $('select[name="product_menu_id"]');
+    //     console.log("OK");
+    //     if ($dropdown.children('option').length >= 1) {  // 1 real option + 1 placeholder/disabled option
+    //         console.log("OK11");
+    //         $dropdown.trigger('change');
+    //     }
+    // });
 </script>
 <?php
 }
@@ -84,7 +92,7 @@ function library($act, $typeFunc, $library_id, $product_menu_id, $product_id, $i
 function categoryName($id) {
     global $db;
     $result = '';
-    $result .= '<select name="product_menu_id" onchange="return product_list(this.value);" class="form-control">';
+    $result .= '<select name="product_menu_id" onchange="return product_list(this.value);" class="form-control" id="product_menu_dropdown">';
     $db->table = "category";
     $db->condition = "`is_active` = 1 AND `type_id` = 6";
     $db->order = "sort ASC";
@@ -95,6 +103,15 @@ function categoryName($id) {
         $result .= loadMenuCategory($db, 0, 0, $row["category_id"], $id);
     }
     $result .= '</select>';
+    $result .= '<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var dropdown = document.getElementById("product_menu_dropdown");
+            if (dropdown.options.length >= 1) { // 1 item + 1 disabled placeholder
+                dropdown.selectedIndex = 1; // Select the first (and only) valid option
+                dropdown.dispatchEvent(new Event("change")); // Trigger the onchange event
+            }
+        });
+    </script>';
     return $result;
 
 }
@@ -117,6 +134,7 @@ function loadMenuCategory($db, $level, $parent, $category_id, $id) {
     $db->order = "sort ASC";
     $db->limit = "";
     $rows2 = $db->select();
+    // var_dump($rows2);
     foreach($rows2 as $row) {
         if ($level <= 8){
             $selected = '';
@@ -128,7 +146,7 @@ function loadMenuCategory($db, $level, $parent, $category_id, $id) {
     return $result;
 }
 
-function productList($menu, $id) {
+function productList($menu, $id) { 
     global $db;
     $result = '<select name="product_id" class="form-control">';
     $selected = '';
@@ -139,6 +157,7 @@ function productList($menu, $id) {
     $db->order = "`created_time` DESC";
     $db->limit = "";
     $rows = $db->select();
+    // var_dump($menu);
     foreach($rows as $row) {
         $selected = '';
         if($id==$row["product_id"]) $selected = ' selected';

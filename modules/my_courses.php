@@ -6,7 +6,7 @@ $slug = getSlugCategory(89);
 
 $breadcrumb_home = '<li class="breadcrumb-home"><a href="'. HOME_URL_LANG . '/home' . '" title="' . $lgTxt_menu_home . '"><i class="fa fa-home"></i>&nbsp; ' . $lgTxt_menu_home . '</a></li>';
 $breadcrumb_category = $breadcrumb_menu = '';
-$breadcrumb_category = '<li><a href="' . HOME_URL_LANG . '/my-courses" title="Khóa học của tôi">Khóa học của tôi</a></li>';
+$breadcrumb_category = '<li><a href="' . HOME_URL_LANG . '/my-courses" title="Bài học của tôi">Bài học của tôi</a></li>';
 
 $arr_like = $arr_logs = array();
 
@@ -36,7 +36,7 @@ if($account["id"]>0) {
 	<div class="row no-margin category-header">
 		<div class="row container">
 			<?php echo '<ul class="no-padding breadcrumb">' . $breadcrumb_home . $breadcrumb_category . '</ul>'; ?>
-			<div class="row no-margin category-header-name"><?php echo '<h2>Khóa học của tôi</h2>'; ?></div>
+			<div class="row no-margin category-header-name"><?php echo '<h2>Bài học của tôi</h2>'; ?></div>
 		</div>
 	</div>
 	<div class="container">

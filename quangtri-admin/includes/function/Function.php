@@ -148,6 +148,21 @@ function loadPageAdmin($str, $url) {
  * @param $str
  * @param $url
  */
+function StringClass_crop($text,$qty) {
+    $txt			=	$text;
+    $arr_replace	=	array("<p>","</p>","<br>","<br />");
+    $text			=	str_replace($arr_replace,"",$text);
+    $dem			=	0;
+    for ( $i=0 ; $i < strlen($text) ; $i++ )
+    {
+        if ($text[$i] == ' ') $dem++;
+        if ($dem == $qty)	break;
+    }
+    $text		=	substr($text,0,$i);
+    if ($i	<	strlen($txt))
+        $text .= "... ";
+    return	$text;
+}
 function loadPageSucces($str, $url) {
 	?>
 	<div align="center">
@@ -179,6 +194,36 @@ function loadPageSucces($str, $url) {
 	die();
 }
 
+function loadPage4Wait($str, $url,$url1) {
+	?>
+	<div align="center">
+		<div id="spinningSquaresG">
+			<div id="spinningSquaresG_1" class="spinningSquaresG">
+			</div>
+			<div id="spinningSquaresG_2" class="spinningSquaresG">
+			</div>
+			<div id="spinningSquaresG_3" class="spinningSquaresG">
+			</div>
+			<div id="spinningSquaresG_4" class="spinningSquaresG">
+			</div>
+			<div id="spinningSquaresG_5" class="spinningSquaresG">
+			</div>
+			<div id="spinningSquaresG_6" class="spinningSquaresG">
+			</div>
+			<div id="spinningSquaresG_7" class="spinningSquaresG">
+			</div>
+			<div id="spinningSquaresG_8" class="spinningSquaresG">
+			</div>
+		</div>
+		<span class="show-ok"><?php echo $str?></span>
+		<br>Vui lòng bấm <a style="font-weight:  bold;" href="<?php echo $url1?>">vào đây</a> để tiếp tục...
+	</div>
+	<head>
+		<meta http-equiv="Refresh" content="1; URL=<?php echo $url?>">
+	</head>
+	<?php
+	die();
+}
 function backupDatabase_new($str) {
 	
 	//loadPageAdmin("Bạn không được phân quyền với chức năng này.$str", ADMIN_DIR);

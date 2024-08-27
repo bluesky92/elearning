@@ -9,25 +9,26 @@ $slug = getSlugCategory(89);
         <div class="header-inner rel">
             <div class="container-fluid">
                 <div class="flex-container">
-					<p class="pull-left" id="datetime"></p>
+					<div class="pull-center" id="time"></div>
                     <div>
-                        <img src="<?php echo HOME_URL . getConstant('file_logo');?>" />
+                        <img src="../images/logo_QT.png"/>
                     </div>
-                    <div class="">
-
-                    </div>
+                    <div class="pull-center" ></div>
                 </div>
             </div>
             <div class="container-fluid">
                 <div class="flex-container">
                     <div class="pull-left"><a style="color:white;" href="<?php echo HOME_URL_LANG . '/' . getSlugCategory(98);?>"
                             class="link-forum"><i></i> <?php echo getNameCategory(98);?></a></div>
-                    <div class="pull-left"><a style="color:white;" href="<?php echo HOME_URL_LANG . '/' . getSlugCategory(100);?>"
-                            class="link-forum"><i></i> <?php echo getNameCategory(90);?></a></div>
-                    <div class="pull-left"><a style="color:white;" href="<?php echo HOME_URL_LANG . '/' . getSlugCategory(101);?>"
-                            class="link-forum"><i></i> <?php echo getNameCategory(101);?></a></div>
-                    <div class="pull-left"><a style="color:white;" href="<?php echo HOME_URL_LANG . '/' . getSlugCategory(96);?>"
-                            class="link-forum"><i></i> <?php echo getNameCategory(96);?></a></div>
+                    <div class="pull-left"><a style="color:white;" href="<?php echo HOME_URL_LANG . '/' . getSlugCategory(89);?>"
+                            class="link-forum"><i></i> <?php echo getNameCategory(89);?></a></div>
+                    <div class="pull-left"><a style="color:white;" href="<?php echo HOME_URL_LANG . '/' . getSlugCategory(102);?>"
+                            class="link-forum"><i></i> <?php echo getNameCategory(102);?></a></div>
+                    <div class="pull-left"><a data-target="#el-modal" data-toggle="modal" style="color:white;" href="javascript:;" onclick="return open_modal(0, 'self_test');">
+                        <i></i> <?php echo getNameCategory(103);?></a>
+                    </div>
+                    <div class="pull-left"><a style="color:white;" href="<?php echo HOME_URL_LANG . '/' . getSlugCategory(104);?>"
+                            class="link-forum"><i></i> <?php echo getNameCategory(104);?></a></div>
                     <div class="pull-right"></div>
                     <?php
 				if($account["id"]>0) {
@@ -108,11 +109,8 @@ $slug = getSlugCategory(89);
                     <?php } else { ?>
                     <div class="hd-user">
                         <a class="btn-register" data-target="#register-modal" data-toggle="modal"
-                            style ="color: white; font-weight: 600; font-size: 16px"
                             href="javascript:;">Đăng ký</a>
-                        <a class="btn-login" data-target="#login-modal" data-toggle="modal" 
-                            style ="background: white; font-size: 16px;"    
-                            href="javascript:;">Đăng
+                        <a class="btn-login" data-target="#login-modal" data-toggle="modal" href="javascript:;">Đăng
                             nhập</a>
                         <!-- Register -->
                         <div class="modal fade" id="register-modal" tabindex="-1" role="dialog"
@@ -211,15 +209,29 @@ $slug = getSlugCategory(89);
         </div>
     </div>
 </header>
-<script>
-  // Get current date and time
-  var now = new Date();
-  var datetime = now.toLocaleString();
-
-  // Insert date and time into HTML
-  document.getElementById("datetime").innerHTML = datetime;
-</script>
 <!-- / .header -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+var timestamp = '<?=time();?>';
+
+function updateTime(){
+  var date = new Date(timestamp * 1000);
+  var optionsTime = { timeZone: 'Asia/Ho_Chi_Minh', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false };
+  var timeString = date.toLocaleTimeString('vi-VN', optionsTime);
+  var day = String(date.getDate()).padStart(2, '0');
+  var month = String(date.getMonth() + 1).padStart(2, '0');
+  var year = date.getFullYear();
+  var dayOfWeek = date.toLocaleDateString('vi-VN', { weekday: 'long', timeZone: 'Asia/Ho_Chi_Minh' });
+  var dateString = dayOfWeek + ', ' + day + '-' + month + '-' + year;
+
+  $('#time').html(dateString + ', ' + timeString);
+  timestamp++;
+}
+
+$(function(){
+  setInterval(updateTime, 1000);
+});
+</script>
 <?php
 $db->table = "product_menu";
 $db->condition = "`is_active` = 1 AND `parent` = 0 AND `category_id` = 89";

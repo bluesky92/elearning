@@ -125,10 +125,10 @@ foreach($rows_crs as $row_crs) {
 				</a>
 				<?php
 				echo '<ul class="no-padding lecture-tools">';
-				if($row_crs['practice']!='') {
-					echo '<li><span class="course-btn-test"><a target="_blank" class="blue" href="' . stripslashes($row_crs['practice']) . '">Bài thực hành <i class="fa fa-fw fa-university"></i></a></span></li>';
-				}
-				echo '<li><span class="course-btn-test"><a data-target="#register-modal" data-toggle="modal" href="javascript:;">Bài kiểm tra <i class="fa fa-fw fa-mortar-board"></i></a></span></li>';
+				// if($row_crs['practice']!='') {
+				// 	echo '<li><span class="course-btn-test"><a target="_blank" class="blue" href="' . stripslashes($row_crs['practice']) . '">Bài thực hành <i class="fa fa-fw fa-university"></i></a></span></li>';
+				// }
+				// echo '<li><span class="course-btn-test"><a data-target="#register-modal" data-toggle="modal" href="javascript:;">Bài kiểm tra <i class="fa fa-fw fa-mortar-board"></i></a></span></li>';
 				if(!is_int($link_next)) {
 					echo '<li><a class="player-navigation-next" href="' . $link_next . '"><span class="text">Bài tiếp</span><span class="icon"><i class="fa fa-step-forward"></i></span></a></li>';
 				}

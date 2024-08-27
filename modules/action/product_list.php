@@ -8,7 +8,7 @@ if(isset($_POST['id'])) {
     $result .= '<option value="0" selected>[ALL] - Dành cho tất cả các khóa học trong chủ đề...</option>';
     $db->table = "product";
     $db->condition = "`is_active` = 1 AND `product_menu_id` = $menu";
-    $db->order = "`created_time` DESC";
+    $db->order = "`created_time` ASC";
     $db->limit = "";
     $rows = $db->select();
     foreach($rows as $row) {

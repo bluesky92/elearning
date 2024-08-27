@@ -87,12 +87,7 @@ if($db->RowCount==0) loadPageAdmin("Mục không tồn tại.","?".TTH_PATH."=ar
                         foreach($rows as $row) {
                             $i++;
 
-                            // $db->table = "examination_answer";
-                            // $db->condition = "`examination_id` = $examination_id AND `user_id` = " . intval($row['user_id']) . " AND `test` = 1";
-                            // $db->order = "";
-                            // $db->limit = "";
-                            // $db->select();
-                            // $total_match = $db->RowCount;
+                           
                             $examination_logs_id = 0;
                             if (intval($row["status"])==1) {
                                 $db->table = "examination_logs";

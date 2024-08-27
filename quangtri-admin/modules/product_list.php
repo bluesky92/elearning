@@ -88,7 +88,7 @@ if(isset($_POST['idDel'])){
 
 						$db->table = "product";
 						$db->condition = "product_menu_id = ".$product_menu_id . $query;
-						$db->order = "created_time DESC";
+						$db->order = "created_time ASC";
 						$db->limit = "";
 						$rows = $db->select();
 
@@ -104,7 +104,7 @@ if(isset($_POST['idDel'])){
 
 						$db->table = "product";
 						$db->condition = "product_menu_id = ".$product_menu_id . $query;
-						$db->order = "created_time DESC";
+						$db->order = "created_time ASC";
 						$db->limit = $start.','.$perpage;
 						$rows = $db->select();
 

@@ -42,7 +42,7 @@ if($account["id"]>0) {
 				$rows = $db->select();
 				if ($db->RowCount > 0) {
 					echo '<div class="col-sm-12 block_courses">';
-					echo '<div class="category-title pull-left">Khóa học của tôi</div><div class="category-show-all pull-right"><a class="btn btn-default btn-sm show-all" href="javascript:;" onclick="return _showAllCourses(this);">Xem tất cả <i class="fa fa-fw fa-plus-circle"></i></a></div><div class="clearfix"></div>';
+					echo '<div class="category-title pull-left">Bài học của tôi</div><div class="category-show-all pull-right"><a class="btn btn-default btn-sm show-all" href="javascript:;" onclick="return _showAllCourses(this);">Xem tất cả <i class="fa fa-fw fa-plus-circle"></i></a></div><div class="clearfix"></div>';
 					echo '<div class="list-course-card">';
 					foreach ($rows as $row) {
 						$photo_avt = '';
@@ -117,7 +117,7 @@ if($account["id"]>0) {
 			$rows = $db->select();
 			if ($db->RowCount > 0) {
 				echo '<div class="col-sm-12 block_courses">';
-				echo '<div class="category-title pull-left">Khóa học nổi bật</div><div class="category-show-all pull-right"><a class="btn btn-default btn-sm show-all" href="javascript:;" onclick="return _showAllCourses(this);">Xem tất cả <i class="fa fa-fw fa-plus-circle"></i></a></div><div class="clearfix"></div>';
+				echo '<div class="category-title pull-left">Chuyên đề nổi bật</div><div class="category-show-all pull-right"><a class="btn btn-default btn-sm show-all" href="javascript:;" onclick="return _showAllCourses(this);">Xem tất cả <i class="fa fa-fw fa-plus-circle"></i></a></div><div class="clearfix"></div>';
 				echo '<div class="list-course-card">';
 				foreach ($rows as $row) {
 					$photo_avt = '';

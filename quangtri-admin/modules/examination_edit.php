@@ -136,7 +136,7 @@ if($typeFunc=='edit'){
 			);
 			$db->condition = "`examination_id` = $examination_id";
 			$db->update($data);
-            
+            /*
 			if($db->AffectedRows>0) {
                 $db->table = "examination_logs";
                 $db->condition = "`examination_id` = $examination_id";
@@ -154,8 +154,8 @@ if($typeFunc=='edit'){
                         'user_id' => $value
                     );
                     $db->insert($data);
-                } */
-            }
+                } 
+            } */
             // Ghi thông báo.
             insertNotify(14, 'examination', $examination_id, $_SESSION["user_id"]);
 
