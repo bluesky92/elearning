@@ -13788,7 +13788,19 @@ header .logo>a>img {
     margin: 2px 0;
     border: 1px solid #ddd;
 }
-
+/* đoạn này bổ sung theo yêu cầu của QT */
+label.question-answer.false {
+    background: red !important;
+    padding-left: 3% !important;
+    text-align: center !important;
+    padding-right: 3% !important;
+}
+label.question-answer.true {
+    background: green !important;
+    padding-left: 3% !important;
+    text-align: center !important;
+    padding-right: 3% !important;
+}
 .answer-option.correct {
     background-color: #1bc105;
     border-color: #d0e9c6;

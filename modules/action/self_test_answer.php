@@ -8,7 +8,7 @@ if ($account["id"] > 0) {
     $status = $start = $time = $count = $total_match = 0;
     $current_time = strtotime($date->vnOther(time(), 'Y-m-d H:i'));
 
-    $count = intval(getConstant('test_count'));
+    // $count = intval(getConstant('test_count'));
     $time = intval(getConstant('test_time'));
 
     $db->table = "self_test";
@@ -19,6 +19,7 @@ if ($account["id"] > 0) {
     foreach ($rows as $row) {
         $status = intval($row['status']);
         $start = intval($row['start']);
+        $count = intval($row['questionCount']);
     }
 
     $minutes = ($time + 3) - (($current_time - $start) / 60);
@@ -76,11 +77,18 @@ if ($account["id"] > 0) {
                 $answer_title = htmlspecialchars($row_ans['title']);
                 
                 $class = '';
-                if (in_array($answer_id, $correct)) {
-                    $class = 'correct';
-                } elseif (in_array($answer_id, $value)) {
+                // đoạn này bổ sung ngày 28-8
+                if (in_array($answer_id, $value)) {
                     $class = 'selected';
+                    if(in_array($answer_id, $correct)) {
+                        $class = 'correct';
+                    }
                 }
+                // if (in_array($answer_id, $correct)) {
+                //     $class = 'correct';
+                // } elseif (in_array($answer_id, $value)) {
+                //     $class = 'selected';
+                // }
                 
                 $all_answers_html .= '<div class="answer-option ' . $class . '">' . $answer_title . '</div>';
             }

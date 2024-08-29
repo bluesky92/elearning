@@ -15,13 +15,23 @@ if($account["id"]>0) {
     $test_count         = intval(getConstant('test_count'));
     $test_time          = intval(getConstant('test_time'));
 
+    if($product_id>0) $query = " AND `product_id` IN (0, $product_id)";
+    else $query = "";
+    $db->table = "library";
+    $db->condition = "`is_active` = 1 AND `product_menu_id` = $product_menu_id " . $query;
+    $db->order = "RAND()";
+    $db->limit = "";
+    $db->select();
+    $test_count = $db->RowCount;
+
     $db->table = "self_test";
     $data = array(
         'product_menu_id' => $product_menu_id,
         'product_id' => $product_id,
         'user_id' => intval($account["id"]),
         'status' => 0,
-        'start' => $start
+        'start' => $start,
+        'questionCount' => $test_count
     );
     $db->insert($data);
     $self_test_id = $db->LastInsertID;
@@ -34,6 +44,8 @@ if($account["id"]>0) {
     $result .= '<div class="examination-info">';
     $result .= '<div class="exa-item"><label>Chủ đề khóa học:</label><label class="inp">' . $product_menu_name . '</label></div>';
     $result .= '<div class="exa-item"><label>Khóa học:</label><label id="_product" class="inp">' . $product_name . '</label></div>';
+    $query = "";
+    
     $result .= '<p><label>Số câu hỏi:</label> ' .  $test_count . '</p>';
     $result .= '<p><label>Thời gian làm bài:</label> ' .  $test_time . ' (phút)</p>';
     $result .= '<p><label>Làm kiểm tra lúc:</label> <strong class="start">' .  $date->vnDateTime($start) . '</strong></p>';
@@ -43,9 +55,9 @@ if($account["id"]>0) {
     $result .= '<form id="fm-library" name="library" method="post" onsubmit="return self_test_answer(\'fm-library\');">';
     $result .= '<input type="hidden" name="self_test_id" value="' . $self_test_id . '">';
 
-    $query = "";
-    if($product_id>0) $query = " AND `product_id` IN (0, $product_id)";
-    else $query = "";
+    // $query = "";
+    // if($product_id>0) $query = " AND `product_id` IN (0, $product_id)";
+    // else $query = "";
     $db->table = "library";
     $db->condition = "`is_active` = 1 AND `product_menu_id` = $product_menu_id " . $query;
     $db->order = "RAND()";
