@@ -29,7 +29,14 @@ $slug = getSlugCategory(89);
                     </div>
                     <div class="pull-left"><a style="color:white;" href="<?php echo HOME_URL_LANG . '/' . getSlugCategory(104);?>"
                             class="link-forum"><i></i> <?php echo getNameCategory(104);?></a></div>
+                    <button aria-expanded="false" class="navbar-toggle collapsed" data-target="#navbar-collapse" data-toggle="collapse" type="button">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <div class="pull-right"></div>
+
                     <?php
 				if($account["id"]>0) {
 					$count = '';

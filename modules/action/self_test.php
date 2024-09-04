@@ -12,7 +12,7 @@ if($account["id"]>0) {
 
     $result .= '<div class="examination-info">';
     $result .= '<div class="exa-item"><label>Chủ đề khóa học:</label><label class="inp">' . categoryName(0) . '</label></div>';
-    $result .= '<div class="exa-item"><label>Chuyên đề:</label><label id="_product" class="inp">' . productList(0, 0) . '</label></div>';
+    $result .= '<div class="exa-item"><label>Chuyên đề:</label><label id="_product" class="inp">' . productList(272, 0) . '</label></div>';
     $result .= '</div>';
     $result .= '<div class="exa-btn text-center"><button type="submit" class="btn btn-danger btn-round">Bắt đầu kiểm tra</button></div>';
 
@@ -41,16 +41,16 @@ function categoryName($id) {
         $result .= loadMenuCategory($db, 0, 0, $row["category_id"], $id);
     }
     $result .= '</select>';
-    $result .= '<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var dropdown = document.getElementById("product_menu_dropdown");
-        // echo (111);
-        if (dropdown.options.length >= 1) { // 1 item + 1 disabled placeholder
-            dropdown.selectedIndex = 1; // Select the first (and only) valid option
-            dropdown.dispatchEvent(new Event("change")); // Trigger the onchange event
-        }
-    });
-    </script>';
+    // $result .= '<script>
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     var dropdown = document.getElementById("product_menu_dropdown");
+    //     console.log(111111);
+    //     if (dropdown.options.length >= 1) { // 1 item + 1 disabled placeholder
+    //         dropdown.selectedIndex = 1; // Select the first (and only) valid option
+    //         dropdown.dispatchEvent(new Event("change")); // Trigger the onchange event
+    //     }
+    // });
+    // </script>';
     return $result;
 
 }
@@ -81,11 +81,12 @@ function productList($menu, $id) {
     global $db;
     $result = '<select name="product_id" class="form-control">';
     $selected = '';
-    if($id==0) $selected = ' selected';
-    $result .= '<option value="0"' . $selected .'>[ALL in] - Dành cho tất cả các khóa học trong chủ đề...</option>';
+    // if($id==0) $selected = ' selected';
+    // $result .= '<option value="0"' . $selected .'>[ALL in] - Dành cho tất cả các khóa học trong chủ đề...</option>';
+    // $result .= '<option value="0"' . $selected .'>Chuyên đề 1...</option>';
     $db->table = "product";
     $db->condition = "`is_active` = 1 AND `product_menu_id` = $menu";
-    $db->order = "`created_time` DESC";
+    $db->order = "`created_time` ASC";
     $db->limit = "";
     $rows = $db->select();
     foreach($rows as $row) {

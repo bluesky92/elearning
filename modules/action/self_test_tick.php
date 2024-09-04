@@ -4,6 +4,8 @@ if (!defined('TTH_SYSTEM')) { die('Please stop!'); }
 if($account["id"]>0) {
     $product_menu_id    = isset($_POST['product_menu_id']) ? intval($_POST['product_menu_id']) : 0;
     $product_id         = isset($_POST['product_id']) ? intval($_POST['product_id']) : 0;
+    // $product_id         = 272;
+    echo($product_menu_id);
 	$date               = new DateClass();
 	$result             = '';
     $current_time       = strtotime($date->vnOther(time(), 'Y-m-d H:i'));
@@ -37,7 +39,7 @@ if($account["id"]>0) {
     $self_test_id = $db->LastInsertID;
 
     $result .= '<div class="modal-dialog" style="width: auto !important;"><div class="modal-content">';
-    $result .= '<div class="modal-header"><h3 class="modal-title">TỰ KIỂM TRA</h3></div>';
+    $result .= '<div class="modal-header"><h3 class="modal-title">.TỰ KIỂM TRA</h3></div>';
 
     $result .= '<div class="modal-body">';
 
@@ -45,8 +47,12 @@ if($account["id"]>0) {
     $result .= '<div class="exa-item"><label>Chủ đề khóa học:</label><label class="inp">' . $product_menu_name . '</label></div>';
     $result .= '<div class="exa-item"><label>Khóa học:</label><label id="_product" class="inp">' . $product_name . '</label></div>';
     $query = "";
-    
+    if($product_id>0) $query = " AND `product_id` IN (0, $product_id)";
+    else $query = "";
     $result .= '<p><label>Số câu hỏi:</label> ' .  $test_count . '</p>';
+
+    // $result .= '<p><label>product_menu_id:</label> ' .  $product_menu_id . '</p>';
+    // $result .= '<p><label>product_id:</label> ' .  $product_id . '</p>';
     $result .= '<p><label>Thời gian làm bài:</label> ' .  $test_time . ' (phút)</p>';
     $result .= '<p><label>Làm kiểm tra lúc:</label> <strong class="start">' .  $date->vnDateTime($start) . '</strong></p>';
     $result .= '</div>';
@@ -56,8 +62,8 @@ if($account["id"]>0) {
     $result .= '<input type="hidden" name="self_test_id" value="' . $self_test_id . '">';
 
     // $query = "";
-    // if($product_id>0) $query = " AND `product_id` IN (0, $product_id)";
-    // else $query = "";
+    
+
     $db->table = "library";
     $db->condition = "`is_active` = 1 AND `product_menu_id` = $product_menu_id " . $query;
     $db->order = "RAND()";

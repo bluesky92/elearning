@@ -12210,10 +12210,32 @@ iframe[name='google_conversion_frame'] {
     margin-top: -13px;
     float: left
 }
-
+.my-footer {
+    padding: 25px 0;
+    color: #fff;
+    font-family: Quicksand;
+    font-size: 16px;
+    font-weight: bold;
+    float: left;
+    width: 100%;
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+}
+.my-footer .my-copyright {
+    text-transform: uppercase;
+}
+@media screen and (max-width: 951px){
+    .pull-center{
+        display: none;
+    }
+}
 .dn {
     display: none
 }
+/* .foo-content .clearfix {
+    display: flex !important;
+} */
 
 @media (max-width: 479px) {
     .home .clearfix {
@@ -35942,9 +35964,13 @@ header .block-es-featured-courses .free-courses .fh .header-inner,
 }
 
 .modal-dialog .result .success {
+    color: black;
+    font-size: 20px;
+    font-weight: 1000;
     background-color: #dff0d8;
     border-color: #d6e9c6;
-    color: #3c763d
+    border: solid;
+    text-align: center;
 }
 
 .modal-dialog .result .failed {
