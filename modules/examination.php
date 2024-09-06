@@ -122,7 +122,7 @@ $breadcrumb_category = '<li><a href="' . HOME_URL_LANG . '/examination" title="K
                                                         </h3>
                                                         <h3 class="item-wrap-1-3">
                                                             <span class="text-limit">
-                                                                ' . getNameProductExa($row['product_id']) . '
+                                                                
                                                             </span> 
                                                         </h3>
                                                         <div>

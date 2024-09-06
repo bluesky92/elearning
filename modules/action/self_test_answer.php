@@ -22,9 +22,10 @@ if ($account["id"] > 0) {
         $count = intval($row['questionCount']);
     }
 
-    $minutes = ($time + 3) - (($current_time - $start) / 60);
+    // $minutes = ($time + 3) - (($current_time - $start) / 60);
 
-    if ($minutes > 0 && $status == 0) {
+    // if ($minutes > 0 && $status == 0) {
+    if ($status == 0) {
         $db->table = "self_test";
         $data = array(
             'status' => 1,
@@ -125,9 +126,10 @@ if ($account["id"] > 0) {
 
     } elseif ($status == 1) {
         echo '<div class="failed">LỖI! Bài kiểm tra này bạn đã hoàn thành trước đó.</div>';
-    } else {
-        echo '<div class="failed">LỖI! Bạn nộp bài quá thời gian quy định.</div>';
-    }
+    } 
+    // else {
+    //     echo '<div class="failed">LỖI! Bạn nộp bài quá thời gian quy định.</div>';
+    // }
 
 } else {
     echo 'Error--';

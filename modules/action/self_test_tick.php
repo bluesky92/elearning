@@ -39,13 +39,13 @@ if($account["id"]>0) {
     $self_test_id = $db->LastInsertID;
 
     $result .= '<div class="modal-dialog" style="width: auto !important;"><div class="modal-content">';
-    $result .= '<div class="modal-header"><h3 class="modal-title">.TỰ KIỂM TRA</h3></div>';
+    $result .= '<div class="modal-header"><h3 class="modal-title">TỰ KIỂM TRA</h3></div>';
 
     $result .= '<div class="modal-body">';
 
     $result .= '<div class="examination-info">';
-    $result .= '<div class="exa-item"><label>Chủ đề khóa học:</label><label class="inp">' . $product_menu_name . '</label></div>';
-    $result .= '<div class="exa-item"><label>Khóa học:</label><label id="_product" class="inp">' . $product_name . '</label></div>';
+    // $result .= '<div class="exa-item"><label>Chủ đề khóa học:</label><label class="inp">' . $product_menu_name . '</label></div>';
+    $result .= '<div class="exa-item"><label>'.$product_menu_name.'</label><label id="_product" class="inp">' . $product_name . '</label></div>';
     $query = "";
     if($product_id>0) $query = " AND `product_id` IN (0, $product_id)";
     else $query = "";
@@ -53,7 +53,7 @@ if($account["id"]>0) {
 
     // $result .= '<p><label>product_menu_id:</label> ' .  $product_menu_id . '</p>';
     // $result .= '<p><label>product_id:</label> ' .  $product_id . '</p>';
-    $result .= '<p><label>Thời gian làm bài:</label> ' .  $test_time . ' (phút)</p>';
+    // $result .= '<p><label>Thời gian làm bài:</label> ' .  $test_time . ' (phút)</p>';
     $result .= '<p><label>Làm kiểm tra lúc:</label> <strong class="start">' .  $date->vnDateTime($start) . '</strong></p>';
     $result .= '</div>';
 
@@ -108,7 +108,8 @@ if($account["id"]>0) {
 
     $result .= '<div class="modal-footer"></div></div></div>';
 
-    $minutes = '<div id="exa-timer">' . $test_time . ':00</div><script>startTimer2();$(function(){$(".square-green input").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",increaseArea:"20%"})});</script>';
+    // $minutes = '<div id="exa-timer">' . $test_time . ':00</div><script>startTimer2();$(function(){$(".square-green input").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",increaseArea:"20%"})});</script>';
+    $minutes = '<script>$(function(){$(".square-green input").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",increaseArea:"20%"})});</script>';
 
 
     echo $result . $minutes;

@@ -37,15 +37,15 @@ if($account["id"]>0) {
                 else $check = 4;
             } else $check = 0;
 
-            $result .= '<div class="modal-header"><button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button><h3 class="modal-title">_KỲ KIỂM TRA_</h3><p class="no-margin text-center">' . stripslashes($row['title']) . '</p></div>';
+            $result .= '<div class="modal-header"><button aria-hidden="true" class="close" data-dismiss="modal" type="button">×</button><h3 class="modal-title">KIỂM TRA CUỐI KHÓA</h3><p class="no-margin text-center"></p></div>';
             $result .= '<div class="modal-body">';
 
             $result .= '<div class="examination-info">';
-            $result .= '<h4><label>Tiêu đề:</label> ' . stripslashes($row['title']) . '</h4>';
-            $result .= '<p><label>Chủ đề khóa học:</label> ' . getNameProductMenu($row['product_menu_id']) . '</p>';
-            $result .= '<p><label>Khóa học:</label> ' . getNameProductExa($row['product_id']) . '</p>';
+            // $result .= '<h4><label>Tiêu đề:</label> ' . stripslashes($row['title']) . '</h4>';
+            // $result .= '<p><label>Chủ đề khóa học:</label> ' . getNameProductMenu($row['product_menu_id']) . '</p>';
+            // $result .= '<p><label>Khóa học:</label> ' . getNameProductExa($row['product_id']) . '</p>';
             $result .= '<p><label>Số câu hỏi:</label> ' .  intval($row['count']) . '</p>';
-            $result .= '<p><label>Số lần được kiểm tra lại:</label> ' .  intval($row['solanthi']) . '</p>';
+            $result .= '<p><label>Số lần được kiểm tra:</label> ' .  intval($row['solanthi']) . '</p>';
             $result .= '<p><label>Thời gian làm bài:</label> ' .  intval($row['time']) . ' (phút)</p>';
             $result .= '<p><label>Lúc bắt đầu:</label> <strong class="start">' .  $date->vnDateTime($row['start']) . '</strong></p>';
             $result .= '<p><label>Người tạo:</label> ' .  getUserFullName($row['user_id']) . '</p>';
